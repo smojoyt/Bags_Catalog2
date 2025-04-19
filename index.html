@@ -1,106 +1,235 @@
 <!DOCTYPE html>
-<html class="no-js no-touch supports-no-cookies" lang="en">
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" />
-    <link rel="stylesheet" href="css/swatches.css" media="all" type="text/css">
-    <link rel="stylesheet" href="css/theme.css" media="all" type="text/css">
-    <link rel="stylesheet" href="https://use.typekit.net/vqj3vud.css" />
-    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css" />
-    <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.0/default/snipcart.css" />
-    <script src="https://cdn.snipcart.com/themes/v3.3.0/default/snipcart.js"></script>
-    <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.0/default/snipcart.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Grid with Filters</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arial">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f9f9f9;
+        }
 
-    <meta charset="utf-8" />
-    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="#212121" name="theme-color" />
-    <link href="https://karrykraze.com" rel="canonical" />
-    <link crossorigin="" href="https://cdn.shopify.com" rel="preconnect" />
+        nav {
+            padding: 20px;
+        }
 
-    <!-- ======================= Broadcast Theme V5.1.3 ========================= -->
-    <link crossorigin="" href="https://fonts.shopifycdn.com" rel="preconnect" />
-    <link as="style" href="css/theme.css" rel="preload" />
-    <link as="script" href="//jemmawynne.com/cdn/shop/t/8/assets/vendor.js?v=93779096473886333451731991704" rel="preload" />
-    <link as="script" href="//jemmawynne.com/cdn/shop/t/8/assets/theme.js?v=76068313012163680871731991704" rel="preload" />
-    <link href="imgs/Logo/Short/SL_White_01.png" rel="icon" type="image/png" />
-    <!-- Title and description ================================================ -->
-    <title>
-        Karry Krave
-    </title>
-    <meta content="" name="description" />
-    <meta content="KarryKraze" property="og:site_name" />
-    <meta content="https://karrykraze.com" property="og:url" />
-    <meta content="KarryKraze" property="og:title" />
-    <meta content="website" property="og:type" />
-    <meta content="Luxury handbags at affordable prices – because style shouldn’t break the bank!" property="og:description" />
-    <meta content="https://smojoyt.github.io/Bagsfdasfdasfsafdasf333/imgs/Logo/Long/Banner3.jpg" property="og:image" />
-    <meta content="1200" property="og:image:width" />
-    <meta content="628" property="og:image:height" />
-    <meta content="summary_large_image" name="twitter:card" />
-    <meta content="KarryKraze" name="twitter:title" />
-    <meta content="KarryKraze" name="twitter:description" />
+            nav .logo {
+                background: rgba(0, 0, 0, 0.6);
+                color: white;
+                font-weight: bold;
+                font-size: 22px;
+                padding: 10px 25px;
+                border: 1px solid white;
+                border-radius: 6px;
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+            }
 
+                nav .logo::before {
+                    content: '\1F6CD';
+                    font-size: 24px;
+                }
 
-    <link as="style" href="css/swatches.css" rel="preload" />
+            nav ul {
+                margin-top: 10px;
+                list-style: none;
+                padding: 0;
+                display: flex;
+                gap: 30px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
 
-   
-  
+                nav ul li a {
+                    color: black;
+                    text-decoration: none;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    font-size: 14px;
+                }
+
+        .filters {
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+            .filters button {
+                background: rgba(255,255,255,0.8);
+                border: 1px solid #ccc;
+                padding: 10px;
+                margin: 5px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+                .filters button.active {
+                    background: black;
+                    color: white;
+                }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 10px;
+            justify-content: center;
+            align-items: start;
+            padding: 20px;
+            margin: 0 auto;
+        }
+
+        .grid-item {
+            position: relative;
+            z-index: 1;
+            will-change: transform;
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+        }
+
+            .grid-item:hover {
+                z-index: 10;
+            }
+
+            .grid-item img {
+                width: 100%;
+                max-width: 300px;
+                object-fit: cover;
+                display: block;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .grid-item .item-price {
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                background: #ffffff;
+                color: #000000;
+                font-weight: bold;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 13px;
+                z-index: 2;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            }
+
+            .grid-item .item-name {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: #ffffff;
+                color: #000000;
+                font-weight: bold;
+                padding: 6px 0;
+                font-size: 13px;
+                box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+                z-index: 2;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .grid-item:hover .item-name {
+                opacity: 1;
+            }
+
+        .item-details {
+            padding: 10px;
+            position: relative;
+        }
+    </style>
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 </head>
+<body>
+    <nav>
+        <div class="logo">Karry Kraze</div>
+        <ul>
+            <li><a href="#">Depop</a></li>
+            <li><a href="#">Instagram</a></li>
+        </ul>
+    </nav>
 
-
-
-
-
-
-
-
-
-<body class="template-index grid-classic aos-initialized" data-animations="true" id="jemma-wynne">
-    <div class=" header__desktop" data-header-desktop="">
-        <div class="header__desktop__upper" data-takes-space-wrapper="">
-            <div class="header__desktop__bar__l" data-child-takes-space="">
-            </div>
-            <div class="header__desktop__bar__c" data-child-takes-space="">
-                <div class="header__logo header__logo--image header__logo--has-transparent">
-                    <a class="header__logo__link" href="https://smojoyt.github.io/Bagsfdasfdasfsafdasf333/">
-                        <figure class="logo__img logo__img--color image-wrapper lazy-image is-loading">
-                            <img alt="Jemma Wynne" class="is-loading" fetchpriority="high" loading="eager" src="/imgs/Logo/Long/LL_Black_02.png" />
-                        </figure>
-                        <figure class="logo__img logo__img--transparent image-wrapper lazy-image is-loading">
-                            <img alt="Jemma Wynne" class="is-loading" fetchpriority="high" loading="eager" src="/imgs/Logo/Long/LL_White_02.png" />
-                        </figure>
-                    </a>
-                </div>
-            </div>
-            
+    <div class="filters">
+        <div>
+            <button data-filter="*">Show All</button>
+            <button data-filter=".bestseller">Best Seller</button>
+            <button data-filter=".small">Small</button>
+            <button data-filter=".medium">Medium</button>
+            <button data-filter=".big">Big</button>
         </div>
+        <div>
+            <button data-sort-by="original-order">Default</button>
+            <button data-sort-by="price">Price: Low to High</button>
+            <button data-sort-by="price-desc">Price: High to Low</button>
+        </div>
+    </div>
 
-        <!-- Nav Text Buttons-->
-
-        <div class=" header__desktop__lower" data-takes-space-wrapper="">
-            <div class="header__desktop__bar__c" data-child-takes-space="">
-                <nav class="header__menu caps">
-                    <div class="menu__item child">
-                        <a class="navlink navlink--toplevel" data-top-link="" target="_blank" href="https://www.depop.com/smojoyt/">
-                            <span class="navtext">
-                                Depop
-                            </span>
-                        </a>
-                    </div>
-                    <div class="menu__item child">
-                        <a class="navlink navlink--toplevel" data-top-link="" target="_blank" href="https://www.instagram.com/karrykraze/">
-                            <span class="navtext">
-                                Instagram
-                            </span>
-                        </a>
-                    </div>
-                    <div class="hover__bar">
-                    </div>
-                    <div class="hover__bg">
-                    </div>
-                </nav>
+    <div class="grid">
+        <div class="grid-item big bestseller" data-price="45">
+            <div class="item-inner">
+                <div class="item-price">$45</div>
+                <img src="https://www.karrykraze.com/imgs/Products/Hats/BunnyEarsRat/02_03_01.jpg" alt="Item 6">
+                <div class="item-name">Travel Duffel</div>
+            </div>
+        </div>
+        <div class="grid-item big bestseller" data-price="45">
+            <div class="item-inner">
+                <div class="item-price">$45</div>
+                <img src="https://i.imgur.com/uIyFPl4.jpeg" alt="Item 6">
+                <div class="item-name">dsa</div>
+            </div>
+        </div>
+        <div class="grid-item big bestseller" data-price="45">
+            <div class="item-inner">
+                <div class="item-price">$45</div>
+                <img src="https://via.placeholder.com/300x250.png?text=Item+1" alt="Item 1">
+                <div class="item-name">Travel Duffel</div>
             </div>
         </div>
     </div>
+
+    <script>document.addEventListener('DOMContentLoaded', function () {
+      var iso = new Isotope('.grid', {
+        itemSelector: '.grid-item',
+        layoutMode: 'masonry',
+        transitionDuration: '0.4s',
+        getSortData: {
+          price: '[data-price] parseInt'
+        }
+      });
+
+      imagesLoaded(document.querySelector('.grid'), function () {
+        iso.layout();
+      });
+
+      const filtersElem = document.querySelector('.filters');
+      filtersElem.addEventListener('click', function (event) {
+        if (!event.target.matches('button')) return;
+
+        document.querySelectorAll('.filters button').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        const filterValue = event.target.getAttribute('data-filter');
+        if (filterValue !== null) iso.arrange({ filter: filterValue });
+
+        const sortValue = event.target.getAttribute('data-sort-by');
+        if (sortValue === 'original-order') {
+          iso.arrange({ sortBy: sortValue });
+        } else if (sortValue === 'price') {
+          iso.arrange({ sortBy: 'price', sortAscending: true });
+        } else if (sortValue === 'price-desc') {
+          iso.arrange({ sortBy: 'price', sortAscending: false });
+        }
+      });
+    });</script>
 </body>
 </html>
