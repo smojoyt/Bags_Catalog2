@@ -95,12 +95,32 @@
                 z-index: 10;
             }
 
+            .grid-item .item-img {
+                position: relative;
+            }
+
             .grid-item img {
                 width: 100%;
                 max-width: 300px;
                 object-fit: cover;
                 display: block;
                 border-bottom: 1px solid #ddd;
+                transition: opacity 0.3s ease;
+            }
+
+                .grid-item img.hover-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    opacity: 0;
+                }
+
+            .grid-item:hover img.default-image {
+                opacity: 0;
+            }
+
+            .grid-item:hover img.hover-image {
+                opacity: 1;
             }
 
         /* Mobile-friendly styles */
@@ -110,44 +130,43 @@
             }
         }
 
+        .grid-item .item-price {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #ffffff;
+            color: #000000;
+            font-weight: bold;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            z-index: 2;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
 
-            .grid-item .item-price {
-                position: absolute;
-                top: 8px;
-                right: 8px;
-                background: #ffffff;
-                color: #000000;
-                font-weight: bold;
-                width: 30px;
-                height: 30px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 13px;
-                z-index: 2;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-            }
+        .grid-item .item-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #ffffff;
+            color: #000000;
+            font-weight: bold;
+            padding: 6px 0;
+            font-size: 13px;
+            box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
-            .grid-item .item-name {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                background: #ffffff;
-                color: #000000;
-                font-weight: bold;
-                padding: 6px 0;
-                font-size: 13px;
-                box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
-                z-index: 2;
-                opacity: 0;
-                transition: opacity 0.3s ease;
-            }
-
-            .grid-item:hover .item-name {
-                opacity: 1;
-            }
+        .grid-item:hover .item-name {
+            opacity: 1;
+        }
 
         .item-details {
             padding: 10px;
@@ -185,59 +204,69 @@
         <div class="grid-item big bestseller" data-price="45">
             <div class="item-inner">
                 <div class="item-price">$45</div>
-                <img src="https://www.karrykraze.com/imgs/Products/Hats/BunnyEarsRat/02_03_01.jpg" alt="Item 6">
+                <div class="item-img">
+                    <img class="default-image" src="/Products/Bags/LV/CrossBody1/CB1Main.jpg" alt="Item 6">
+                    <img class="hover-image" src="/Products/Bags/LV/CrossBody1/CB1Hover.jpg" alt="Hover 6">
+                </div>
                 <div class="item-name">Travel Duffel</div>
             </div>
         </div>
         <div class="grid-item big bestseller" data-price="45">
             <div class="item-inner">
                 <div class="item-price">$45</div>
-                <img src="https://i.imgur.com/uIyFPl4.jpeg" alt="Item 6">
+                <div class="item-img">
+                    <img class="default-image" src="https://i.imgur.com/uIyFPl4.jpeg" alt="Item 6">
+                    <img class="hover-image" src="https://via.placeholder.com/300x250.png?text=Hovered+Image" alt="Hover 6">
+                </div>
                 <div class="item-name">dsa</div>
             </div>
         </div>
         <div class="grid-item big bestseller" data-price="45">
             <div class="item-inner">
                 <div class="item-price">$45</div>
-                <img src="https://via.placeholder.com/300x250.png?text=Item+1" alt="Item 1">
+                <div class="item-img">
+                    <img class="default-image" src="https://via.placeholder.com/300x250.png?text=Item+1" alt="Item 1">
+                    <img class="hover-image" src="https://via.placeholder.com/300x250.png?text=Hovered+Image" alt="Hover 1">
+                </div>
                 <div class="item-name">Travel Duffel</div>
             </div>
         </div>
     </div>
 
-    <script>document.addEventListener('DOMContentLoaded', function () {
-      var iso = new Isotope('.grid', {
-        itemSelector: '.grid-item',
-        layoutMode: 'masonry',
-        transitionDuration: '0.4s',
-        getSortData: {
-          price: '[data-price] parseInt'
-        }
-      });
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+            var iso = new Isotope('.grid', {
+                itemSelector: '.grid-item',
+                layoutMode: 'masonry',
+                transitionDuration: '0.4s',
+                getSortData: {
+                    price: '[data-price] parseInt'
+                }
+            });
 
-      imagesLoaded(document.querySelector('.grid'), function () {
-        iso.layout();
-      });
+            imagesLoaded(document.querySelector('.grid'), function () {
+                iso.layout();
+            });
 
-      const filtersElem = document.querySelector('.filters');
-      filtersElem.addEventListener('click', function (event) {
-        if (!event.target.matches('button')) return;
+            const filtersElem = document.querySelector('.filters');
+            filtersElem.addEventListener('click', function (event) {
+                if (!event.target.matches('button')) return;
 
-        document.querySelectorAll('.filters button').forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
+                document.querySelectorAll('.filters button').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
 
-        const filterValue = event.target.getAttribute('data-filter');
-        if (filterValue !== null) iso.arrange({ filter: filterValue });
+                const filterValue = event.target.getAttribute('data-filter');
+                if (filterValue !== null) iso.arrange({ filter: filterValue });
 
-        const sortValue = event.target.getAttribute('data-sort-by');
-        if (sortValue === 'original-order') {
-          iso.arrange({ sortBy: sortValue });
-        } else if (sortValue === 'price') {
-          iso.arrange({ sortBy: 'price', sortAscending: true });
-        } else if (sortValue === 'price-desc') {
-          iso.arrange({ sortBy: 'price', sortAscending: false });
-        }
-      });
-    });</script>
+                const sortValue = event.target.getAttribute('data-sort-by');
+                if (sortValue === 'original-order') {
+                    iso.arrange({ sortBy: sortValue });
+                } else if (sortValue === 'price') {
+                    iso.arrange({ sortBy: 'price', sortAscending: true });
+                } else if (sortValue === 'price-desc') {
+                    iso.arrange({ sortBy: 'price', sortAscending: false });
+                }
+            });
+        });</script>
 </body>
 </html>
