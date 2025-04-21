@@ -274,9 +274,13 @@
     </nav>
     <div class="filters">
         <div>
-            <button data-filter=".small">Small</button>
-            <button data-filter=".medium">Medium</button>
-            <button data-filter=".big">Big</button>
+            <button data-filter=".lv">Louis Vuitton</button>
+            <button data-filter=".dior">Dior</button>
+            <button data-filter=".chanel">Chanel</button>
+            <button data-filter=".telfar">Telfar</button>
+            <button data-filter=".marcj">Marc Jacobs</button>
+            <button data-filter=".nb">Non Branded</button>
+            <button data-filter=".acc">Acccesories</button>
         </div>
         <div>
             <button data-filter=".bestseller">Best Seller</button>
@@ -289,7 +293,7 @@
         </div>
     </div>
     <div class="grid">
-        <div class="grid-item small bestseller out-of-stock" data-price="144">
+        <div class="grid-item lv bestseller out-of-stock" data-price="144">
             <div class="item-inner">
                 <div class="item-img">
                     <span class="outofstock-badge">Out of Stock</span>
@@ -383,8 +387,8 @@
                 button.addEventListener('click', function () {
                     button.classList.toggle('active');
                     const activeFilters = filterButtons.filter(btn => btn.classList.contains('active'));
-                    const sizeFilters = activeFilters.filter(btn => ['.small', '.medium', '.big'].includes(btn.getAttribute('data-filter'))).map(btn => btn.getAttribute('data-filter'));
-                    const tagFilters = activeFilters.filter(btn => !['.small', '.medium', '.big'].includes(btn.getAttribute('data-filter'))).map(btn => btn.getAttribute('data-filter'));
+                    const sizeFilters = activeFilters.filter(btn => ['.lv', '.dior', '.chanel', '.telfar', '.marcj', '.nb', '.acc',].includes(btn.getAttribute('data-filter'))).map(btn => btn.getAttribute('data-filter'));
+                    const tagFilters = activeFilters.filter(btn => !['.lv', '.dior', '.chanel', '.telfar', '.marcj', '.nb', '.acc',].includes(btn.getAttribute('data-filter'))).map(btn => btn.getAttribute('data-filter'));
                     let filterValue = '*';
                     if (tagFilters.length && sizeFilters.length) {
                         filterValue = sizeFilters.map(size => tagFilters.map(tag => size + tag).join('')).join(',');
