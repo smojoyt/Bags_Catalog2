@@ -51,7 +51,7 @@
             padding: 10px;
             text-align: center;
             padding-left: 10px;
-            color:black;
+            color:black !important;
         }
 
             .filters button {
@@ -264,7 +264,7 @@
             display: block; /* makes the whole area clickable */
         }
         .top-sort {
-        margin-bottom:10px;
+        margin-bottom:20px;
         }
 
     </style>
@@ -361,8 +361,14 @@
                 transitionDuration: '0.4s',
                 getSortData: {
                     price: '[data-price] parseInt'
+                },
+                masonry: {
+                    columnWidth: 200,
+                    isFitWidth: true
                 }
             });
+        });
+
 
             imagesLoaded(document.querySelector('.grid'), function () {
                 iso.layout();
