@@ -51,6 +51,7 @@
             padding: 10px;
             text-align: center;
             padding-left: 10px;
+            color:black;
         }
 
             .filters button {
@@ -220,7 +221,6 @@
             }
 
             .grid {
-                padding: 300px;
                 grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             }
 
@@ -263,6 +263,9 @@
             color: inherit;
             display: block; /* makes the whole area clickable */
         }
+        .top-sort {
+        margin-bottom:10px;
+        }
 
     </style>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
@@ -282,7 +285,7 @@
         </ul>
     </nav>
     <div class="filters">
-        <div>
+        <div class="top-sort">
             <button data-filter=".nb">Non Branded</button>
             <button data-filter=".lv">Louis Vuitton</button>
             <button data-filter=".dior">Dior</button>
