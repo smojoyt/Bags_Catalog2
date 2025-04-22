@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Grid with Filters</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arial">
+    <title>Isotope - filtering</title>
+    <link rel="stylesheet" href="https://unpkg.com/muicss@0.9.43/dist/css/mui.min.css">
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body, html {
             margin: 0;
             padding: 0;
@@ -14,48 +18,58 @@
             background: #f9f9f9;
         }
 
-        nav {
-            padding: 20px;
+        .grid-wrapper {
+            text-align: center;
+            margin: auto 8vw;
         }
 
-            nav .logo {
-                display: inline-block;
+        .grid {
+            display: inline-block;
+            background: #DDD;
+            transition: 0.3s ease;
+        }
+
+            .grid.shrinking {
+                transition-delay: 1.0s;
             }
 
-                nav .logo img {
-                    max-height: 60px;
-                    height: auto;
-                    width: auto;
-                }
-
-            nav ul {
-                margin-top: 10px;
-                list-style: none;
-                padding: 0;
-                display: flex;
-                gap: 30px;
-                justify-content: center;
-                flex-wrap: wrap;
+            .grid:after {
+                content: '';
+                display: block;
+                clear: both;
             }
 
-                nav ul li a {
-                    color: black;
-                    text-decoration: none;
-                    font-weight: bold;
-                    text-transform: uppercase;
-                    font-size: 14px;
-                }
+        .grid-item {
+            position: relative;
+            float: left;
+            width: 300px;
+            height: auto;
+            border: none;
+            overflow: hidden;
+            text-align: left;
+        }
+
+            .grid-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                transition: opacity 0.3s ease;
+            }
+
+        .grid-item--height2 {
+            height: 200px;
+        }
 
         .filters {
             margin-top: 10px;
             padding: 10px;
             text-align: center;
             padding-left: 10px;
-            color:black !important;
+            color: black !important;
         }
 
             .filters button {
-                color:black!important;
                 background: #f0f0f0;
                 border: none;
                 padding: 10px 16px;
@@ -69,38 +83,6 @@
                     background: black;
                     color: white;
                 }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 10px;
-            justify-content: center;
-            align-items: start;
-            padding: 20px;
-            margin: 0 auto;
-        }
-
-        .grid-item {
-            position: relative;
-            z-index: 1;
-            will-change: transform;
-            backface-visibility: hidden;
-            transform-style: preserve-3d;
-            background: transparent;
-            padding: 10px;
-            text-align: left;
-            max-width: 28vw;
-            min-width: 90px;
-            margin: 0 auto;
-        }
-
-            .grid-item:hover {
-                z-index: 10;
-            }
-
-            .grid-item .item-img {
-                position: relative;
-            }
 
         .outofstock-badge {
             position: absolute;
@@ -176,19 +158,28 @@
             transition: opacity 0.3s ease;
         }
 
+        .grid-item img {
+            width: 100%;
+            max-width: 400px;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
         .grid-item:hover img.hover-image {
             opacity: 1;
         }
 
-        @media (max-width: 600px) {
-            
 
-                .grid-item .item-desc {
-                    max-width: 100%;
-                    font-size: 12px;
-                    white-space: normal;
-                    overflow-wrap: break-word;
-                }
+        @media (max-width: 600px) {
+
+
+            .grid-item .item-desc {
+                max-width: 100%;
+                font-size: 12px;
+                white-space: normal;
+                overflow-wrap: break-word;
+            }
 
             .outofstock-badge,
             .sale-badge,
@@ -212,7 +203,7 @@
                 height: auto;
                 display: block;
                 object-fit: cover;
-                max-width: 150px;
+                max-width: 60vw;
             }
 
             .filters {
@@ -222,10 +213,11 @@
             }
 
             .grid {
-                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                max-width: 60vw
             }
 
             .grid-item {
+                max-width: 60vw;
                 padding: 5px;
             }
         }
@@ -259,32 +251,23 @@
         .grid-item .item-name {
             display: none;
         }
+
         a.item-inner {
             text-decoration: none;
             color: inherit;
             display: block; /* makes the whole area clickable */
         }
-        .top-sort {
-        margin-bottom:20px;
-        }
 
+        .top-sort {
+            margin-bottom: 20px;
+        }
     </style>
-    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 </head>
 <body>
-    <nav>
-        <div class="logo">
-            <a href="https://karrykraze.com">
-                <img src="Branding/LL_Black_01.png" alt="Karry Kraze Logo">
-            </a>
-            
-        </div>
-        <ul>
-            <li><a href="https://www.depop.com/smojoyt/">Depop</a></li>
-            <li><a href="https://www.instagram.com/karrykraze/">Instagram</a></li>
-        </ul>
-    </nav>
+
+    <h1>Isotope - masonry fitWidth</h1>
+    <p>Grid centered</p>
+
     <div class="filters">
         <div class="top-sort">
             <button data-filter=".nb">Non Branded</button>
@@ -293,7 +276,7 @@
             <button data-filter=".chanel">Chanel</button>
             <button data-filter=".telfar">Telfar</button>
             <button data-filter=".marcj">Marc Jacobs</button>
-            <button data-filter=".acc">Acccesories</button>
+            <button data-filter=".acc">Accessories</button>
         </div>
         <div>
             <button data-filter=".bestseller">Best Seller</button>
@@ -304,128 +287,156 @@
         <div style="margin-top: 10px;">
             <button id="clear-filters" style="background: none; border: none; color: black; font-weight: bold; text-decoration: underline; cursor: pointer;">Clear all</button>
         </div>
+        <button data-filter="*">show all</button>
+        <button data-filter=".grid-item--height2">height 2</button>
+        <button data-filter=":not(.grid-item--height2)">height 1</button>
     </div>
-    <div class="grid">
-        <div class="grid-item lv bestseller out-of-stock" data-price="144">
-            <a href="https://www.depop.com/products/smojoyt-luxury-monogram-crossbody-bag-5f9f/manage/" class="item-inner">
-                <div class="item-img">
-                    <span class="outofstock-badge">Out of Stock</span>
-                    <span class="bestseller-badge">Best Seller</span>
-                    <img class="default-image" src="Products/Bags/LV/CrossBody1/CB1Main.png">
-                    <img class="hover-image" src="Products/Bags/LV/CrossBody1/CB1Hover.jpg">
-                </div>
-                <div class="item-price">$144 <span class="original-price">$200</span></div>
-                <div class="item-desc">Louis Vuitton Duo Messenger Bag</div>
-            </a>
+
+    <div class="grid-wrapper">
+        <div class="grid" id="gridBox">
+            <div class="grid-item lv bestseller out-of-stock" data-price="144">
+                <a href="https://www.depop.com/products/smojoyt-luxury-monogram-crossbody-bag-5f9f/manage/" class="item-inner">
+                    <div class="item-img">
+                        <span class="outofstock-badge">Out of Stock</span>
+                        <span class="bestseller-badge">Best Seller</span>
+                        <img class="default-image" src="Products/Bags/LV/CrossBody1/CB1Main.png">
+                        <img class="hover-image" src="Products/Bags/LV/CrossBody1/CB1Hover.jpg">
+                    </div>
+                    <div class="item-price">$144 <span class="original-price">$200</span></div>
+                    <div class="item-desc">Louis Vuitton Duo Messenger Bag</div>
+                </a>
+            </div>
+            <div class="grid-item big sale nb" data-price="49.99">
+                <a href="https://www.karrykraze.com/products/bags/Bag_BitesIsWeird" class="item-inner">
+                    <div class="item-img">
+                        <span class="sale-badge">SALE</span>
+                        <img class="default-image" src="Products/Bags/NonBrand/Bitches/BMain.png">
+                        <img class="hover-image" src="Products/Bags/NonBrand/Bitches/BHover.jpg">
+                    </div>
+                    <div class="item-price">$49.99 <span class="original-price">$110</span></div>
+                    <div class="item-desc">B!tch#$ is Weird Tote Bag</div>
+                </a>
+            </div>
+            <div class="grid-item sale nb" data-price="49.99">
+                <a href="https://www.karrykraze.com/products/bags/Bag_MiniHeart" class="item-inner">
+                    <div class="item-img">
+                        <span class="sale-badge">SALE</span>
+                        <img class="default-image" src="Products/Bags/NonBrand/HeartEmbossed/HEMain.png">
+                        <img class="hover-image" src="Products/Bags/NonBrand/HeartEmbossed/HEHover.jpg">
+                    </div>
+                    <div class="item-price">$49.99 <span class="original-price">$110</span></div>
+                    <div class="item-desc">Heart Embossed Shoulder Bag</div>
+                </a>
+            </div>
+            <div class="grid-item nb sale" data-price="49.99">
+                <a href="https://www.karrykraze.com/products/bags/bag_TheBucket" class="item-inner">
+                    <div class="item-img">
+                        <span class="sale-badge">SALE</span>
+                        <img class="default-image" src="Products/Bags/NonBrand/TheBucket/TBMain.png">
+                        <img class="hover-image" src="Products/Bags/NonBrand/TheBucket/TBHover.jpg">
+                    </div>
+                    <div class="item-price">$49.99 <span class="original-price">$110</span></div>
+                    <div class="item-desc">The Bucket Sack Bag</div>
+                </a>
+            </div>
         </div>
-        <div class="grid-item big sale nb" data-price="49.99">
-            <a href="https://www.karrykraze.com/products/bags/Bag_BitesIsWeird" class="item-inner">
-                <div class="item-img">
-                    <span class="sale-badge">SALE</span>
-                    <img class="default-image" src="Products/Bags/NonBrand/Bitches/BMain.png">
-                    <img class="hover-image" src="Products/Bags/NonBrand/Bitches/BHover.jpg">
-                </div>
-                <div class="item-price">$49.99 <span class="original-price">$110</span></div>
-                <div class="item-desc">B!tch#$ is Weird Tote Bag</div>
-            </a>
-        </div>
-        <div class="grid-item sale nb" data-price="49.99">
-            <a href="https://www.karrykraze.com/products/bags/Bag_MiniHeart" class="item-inner">
-                <div class="item-img">
-                    <span class="sale-badge">SALE</span>
-                    <img class="default-image" src="Products/Bags/NonBrand/HeartEmbossed/HEMain.png">
-                    <img class="hover-image" src="Products/Bags/NonBrand/HeartEmbossed/HEHover.jpg">
-                </div>
-                <div class="item-price">$49.99 <span class="original-price">$110</span></div>
-                <div class="item-desc">Heart Embossed Shoulder Bag</div>
-            </a>
-        </div>
-        <div class="grid-item nb sale" data-price="49.99">
-            <a href="https://www.karrykraze.com/products/bags/bag_TheBucket" class="item-inner">
-                <div class="item-img">
-                    <span class="sale-badge">SALE</span>
-                    <img class="default-image" src="Products/Bags/NonBrand/TheBucket/TBMain.png">
-                    <img class="hover-image" src="Products/Bags/NonBrand/TheBucket/TBHover.jpg">
-                </div>
-                <div class="item-price">$49.99 <span class="original-price">$110</span></div>
-                <div class="item-desc">The Bucket Sack Bag</div>
-            </a>
-        </div>
-        
-        
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var iso = new Isotope('.grid', {
-                itemSelector: '.grid-item',
-                layoutMode: 'masonry',
-                transitionDuration: '0.4s',
-                getSortData: {
-                    price: '[data-price] parseInt'
-                },
-                masonry: {
-                    columnWidth: 200,
-                    isFitWidth: true
+        var $grid = $('.grid').isotope({
+            itemSelector: '.grid-item',
+            layoutMode: 'masonry',
+            masonry: {
+                columnWidth: 300,
+                isFitWidth: true
+            },
+            transitionDuration: '0.5s',
+            stagger: 100,
+            getSortData: {
+                price: '[data-price] parseFloat'
+            }
+        });
+
+        imagesLoaded(document.querySelector('.grid'), function () {
+            $grid.isotope('layout');
+        });
+
+        const filterButtons = document.querySelectorAll('.filters button[data-filter]');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                button.classList.toggle('active');
+                const activeButtons = Array.from(filterButtons).filter(btn => btn.classList.contains('active'));
+                const sizeFilters = activeButtons.filter(btn => ['.lv', '.dior', '.chanel', '.telfar', '.marcj', '.nb', '.acc'].includes(btn.getAttribute('data-filter'))).map(btn => btn.getAttribute('data-filter'));
+                const tagFilters = activeButtons.filter(btn => !['.lv', '.dior', '.chanel', '.telfar', '.marcj', '.nb', '.acc'].includes(btn.getAttribute('data-filter'))).map(btn => btn.getAttribute('data-filter'));
+
+                let filterValue = '*';
+                if (sizeFilters.length && tagFilters.length) {
+                    filterValue = sizeFilters.map(size => tagFilters.map(tag => size + tag).join(',')).join(',');
+                } else if (tagFilters.length) {
+                    filterValue = tagFilters.join(',');
+                } else if (sizeFilters.length) {
+                    filterValue = sizeFilters.join(',');
                 }
+                $grid.isotope({ filter: filterValue });
             });
         });
 
+        document.getElementById('clear-filters').addEventListener('click', function () {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            document.getElementById('price-sort-indicator').textContent = '─';
+            document.getElementById('toggle-price-sort').setAttribute('data-sort', 'default');
+            $grid.isotope({ filter: '*', sortBy: 'original-order' });
+        });
 
-            imagesLoaded(document.querySelector('.grid'), function () {
-                iso.layout();
-            });
+        const grid = document.getElementById('gridBox');
+        let previousHeight = grid.offsetHeight;
+        let previousWidth = grid.offsetWidth;
 
-            const filtersElem = document.querySelector('.filters');
-            const filterButtons = Array.from(filtersElem.querySelectorAll('button[data-filter]'));
+        const observer = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                const newHeight = entry.contentRect.height;
+                const newWidth = entry.contentRect.width;
 
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    button.classList.toggle('active');
-                    const activeFilters = filterButtons.filter(btn => btn.classList.contains('active'));
-                    const sizeFilters = activeFilters.filter(btn => ['.lv', '.dior', '.chanel', '.telfar', '.marcj', '.nb', '.acc',].includes(btn.getAttribute('data-filter'))).map(btn => btn.getAttribute('data-filter'));
-                    const tagFilters = activeFilters.filter(btn => !['.lv', '.dior', '.chanel', '.telfar', '.marcj', '.nb', '.acc',].includes(btn.getAttribute('data-filter'))).map(btn => btn.getAttribute('data-filter'));
-                    let filterValue = '*';
-                    if (tagFilters.length && sizeFilters.length) {
-                        filterValue = sizeFilters.map(size => tagFilters.map(tag => size + tag).join('')).join(',');
-                    } else if (tagFilters.length) {
-                        filterValue = tagFilters.join('');
-                    } else if (sizeFilters.length) {
-                        filterValue = sizeFilters.join(',');
-                    }
-                    iso.arrange({ filter: filterValue });
-                });
-            });
-
-            document.getElementById('clear-filters').addEventListener('click', function () {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                const sortIndicator = document.getElementById('price-sort-indicator');
-                if (sortIndicator) sortIndicator.textContent = '─';
-                document.getElementById('toggle-price-sort').setAttribute('data-sort', 'default');
-                iso.arrange({ filter: '*', sortBy: 'original-order' });
-            });
-
-            document.getElementById('toggle-price-sort').addEventListener('click', function () {
-                const btn = this;
-                const current = btn.getAttribute('data-sort');
-                const sortIndicator = document.getElementById('price-sort-indicator');
-                let next;
-
-                if (current === 'default') {
-                    next = 'asc';
-                    sortIndicator.textContent = '↑';
-                    iso.arrange({ sortBy: 'price', sortAscending: true });
-                } else if (current === 'asc') {
-                    next = 'desc';
-                    sortIndicator.textContent = '↓';
-                    iso.arrange({ sortBy: 'price', sortAscending: false });
+                if (newHeight > previousHeight || newWidth > previousWidth) {
+                    grid.classList.add('shrinking');
                 } else {
-                    next = 'default';
-                    sortIndicator.textContent = '─';
-                    iso.arrange({ sortBy: 'original-order' });
+                    grid.classList.remove('shrinking');
                 }
 
-                btn.setAttribute('data-sort', next);
-            });
+                previousHeight = newHeight;
+                previousWidth = newWidth;
+            }
+        });
+
+        observer.observe(grid);
+
+
+
+
+        document.getElementById('toggle-price-sort').addEventListener('click', function () {
+            const btn = this;
+            const current = btn.getAttribute('data-sort');
+            const sortIndicator = document.getElementById('price-sort-indicator');
+            let next;
+
+            if (current === 'default') {
+                next = 'asc';
+                sortIndicator.textContent = '↑';
+                $grid.isotope({ sortBy: 'price', sortAscending: true });
+            } else if (current === 'asc') {
+                next = 'desc';
+                sortIndicator.textContent = '↓';
+                $grid.isotope({ sortBy: 'price', sortAscending: false });
+            } else {
+                next = 'default';
+                sortIndicator.textContent = '─';
+                $grid.isotope({ sortBy: 'original-order' });
+            }
+            btn.setAttribute('data-sort', next);
         });
     </script>
 </body>
