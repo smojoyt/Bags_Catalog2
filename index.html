@@ -371,7 +371,7 @@
             layoutMode: 'masonry',
             masonry: {
                 columnWidth: 150,
-                isFitWidth: true
+                isFitWidth: window.innerWidth > 768 ? true : false
             },
             transitionDuration: '0.5s',
             stagger: 100,
