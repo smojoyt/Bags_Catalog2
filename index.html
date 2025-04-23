@@ -543,17 +543,9 @@
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
     <script>
-        var $grid = $('.grid');
-
-        // Function to choose layout mode based on screen width
-        function getLayoutMode() {
-            return window.innerWidth < 768 ? 'vertical' : 'masonry';
-        }
-
-        // Initialize Isotope with dynamic layout mode
-        $grid.isotope({
+        var $grid = $('.grid').isotope({
             itemSelector: '.grid-item',
-            layoutMode: getLayoutMode(),
+            layoutMode: 'masonry',
             masonry: {
                 columnWidth: 150,
                 isFitWidth: true
@@ -565,27 +557,9 @@
             }
         });
 
-        // Layout after images are loaded
         imagesLoaded(document.querySelector('.grid'), function () {
             $grid.isotope('layout');
         });
-
-        // Track current layout to prevent unnecessary updates
-        let currentLayout = getLayoutMode();
-
-        // Handle window resizing to update layout mode if needed
-        let resizeTimeout;
-        $(window).on('resize', function () {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(function () {
-                let newLayout = getLayoutMode();
-                if (newLayout !== currentLayout) {
-                    $grid.isotope({ layoutMode: newLayout });
-                    currentLayout = newLayout;
-                }
-            }, 200);
-        });
-
 
         const filterButtons = document.querySelectorAll('.filters button[data-filter]');
 
