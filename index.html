@@ -61,7 +61,7 @@
             display: flex;
             flex-wrap: wrap; /* ✅ allows items to wrap to next line */
             align-items: flex-end;
-            gap: 8px;
+            gap: 2px;
             max-width: 100%; /* optional, helps for responsive wrapping */
         }
 
@@ -104,20 +104,8 @@
             flex-basis: 50%;
         }
 
-        .price-wrap {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: flex-end;
-            gap: 8px;
-            max-width: 100%;
-        }
+      
 
-        .label {
-            font-weight: bold;
-            color: green;
-            font-size: 16px;
-        }
 
         .discounted-price {
             font-weight: bold;
@@ -175,7 +163,41 @@
             font-size: 16px;
         }
 
+        @media (max-width: 600px) {
+            .label {
+                font-size: 14px;
+            }
 
+            .discounted-price {
+                font-size: 20px;
+            }
+
+                .discounted-price .currency {
+                    font-size: 12px;
+                }
+
+                .discounted-price .dollars {
+                    font-size: 22px;
+                }
+
+                .discounted-price .cents {
+                    font-size: 12px;
+                    padding-top: 2px;
+                }
+
+            .original-price {
+                font-size: 14px;
+            }
+
+            .savings-label {
+                font-size: 12px;
+                padding: 1px 4px;
+            }
+
+            .savings-amount {
+                font-size: 14px;
+            }
+        }
 
 
         .grid-wrapper {
