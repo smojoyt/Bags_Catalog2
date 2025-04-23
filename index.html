@@ -414,13 +414,6 @@
             color: darkred;
         }
 
-        .grid-item .original-price {
-            text-decoration: line-through;
-            font-size: 18px;
-            color: #999;
-            font-weight: normal;
-            margin-left: 8px;
-        }
 
         .grid-item .item-desc {
             margin-top: 6px;
@@ -478,9 +471,6 @@
         <div style="margin-top: 10px;">
             <button id="clear-filters" style="background: none; border: none; color: black; font-weight: bold; text-decoration: underline; cursor: pointer;">Clear all</button>
         </div>
-        <button data-filter="*">show all</button>
-        <button data-filter=".grid-item--height2">height 2</button>
-        <button data-filter=":not(.grid-item--height2)">height 1</button>
     </div>
 
     <div class="grid-wrapper">
@@ -553,9 +543,17 @@
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
     <script>
-        var $grid = $('.grid').isotope({
+        var $grid = $('.grid');
+
+        // Function to choose layout mode based on screen width
+        function getLayoutMode() {
+            return window.innerWidth < 768 ? 'vertical' : 'masonry';
+        }
+
+        // Initialize Isotope with dynamic layout mode
+        $grid.isotope({
             itemSelector: '.grid-item',
-            layoutMode: 'masonry',
+            layoutMode: getLayoutMode(),
             masonry: {
                 columnWidth: 150,
                 isFitWidth: true
@@ -567,9 +565,27 @@
             }
         });
 
+        // Layout after images are loaded
         imagesLoaded(document.querySelector('.grid'), function () {
             $grid.isotope('layout');
         });
+
+        // Track current layout to prevent unnecessary updates
+        let currentLayout = getLayoutMode();
+
+        // Handle window resizing to update layout mode if needed
+        let resizeTimeout;
+        $(window).on('resize', function () {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function () {
+                let newLayout = getLayoutMode();
+                if (newLayout !== currentLayout) {
+                    $grid.isotope({ layoutMode: newLayout });
+                    currentLayout = newLayout;
+                }
+            }, 200);
+        });
+
 
         const filterButtons = document.querySelectorAll('.filters button[data-filter]');
 
