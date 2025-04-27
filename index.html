@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Isotope - filtering</title>
+    <title>KarryKraze - Catalog</title>
+    <link rel="icon" href="Branding/LL_Black_01.png" type="image/x-icon">
     <link rel="stylesheet" href="https://unpkg.com/muicss@0.9.43/dist/css/mui.min.css">
     <style>
         * {
@@ -70,6 +71,14 @@
             color: green;
             font-size: 16px;
         }
+        .main-price {
+            font-weight: bold;
+            font-size: 24px;
+            color: black;
+            display: inline-flex;
+            align-items: flex-start;
+            line-height: 1;
+        }
 
         .discounted-price {
             font-weight: bold;
@@ -79,6 +88,7 @@
             align-items: flex-start;
             line-height: 1;
         }
+
 
             .discounted-price .currency {
                 font-size: 16px;
@@ -104,7 +114,7 @@
             flex-basis: 50%;
         }
 
-      
+
 
 
         .discounted-price {
@@ -389,14 +399,14 @@
             }
 
             .filters {
-                font-size:11px;
+                font-size: 11px;
                 padding-left: 1rem;
                 padding-right: 1rem;
             }
 
-            .filters button {
-                padding: 5px 8px;
-            }
+                .filters button {
+                    padding: 5px 8px;
+                }
 
             .grid {
             }
@@ -479,6 +489,7 @@
 
     <div class="grid-wrapper">
         <div class="grid" id="gridBox">
+            <!--LV Cross Body 1-->
             <div class="grid-item lv bestseller out-of-stock" data-price="144">
                 <a href="https://www.depop.com/products/smojoyt-luxury-monogram-crossbody-bag-5f9f/manage/" class="item-inner">
                     <div class="item-img">
@@ -487,11 +498,19 @@
                         <img class="default-image" src="Products/Bags/LV/CrossBody1/CB1Main.png">
                         <img class="hover-image" src="Products/Bags/LV/CrossBody1/CB1Hover.jpg">
                     </div>
-                    <div class="item-price">$144 <span class="original-price">$200</span></div>
+                    <div class="price-wrap">
+                        <span class="main-price">
+                            <span class="currency">$</span>
+                            <span class="dollars">144</span>
+                            <span class="cents">99</span>
+                        </span>
+                    </div>
                     <div class="item-desc">Louis Vuitton Duo Messenger Bag</div>
                 </a>
             </div>
-            <div class="grid-item big sale nb" data-price="49.99">
+
+            <!--Bitches is Weird-->
+            <div class="grid-item big sale nb" data-price="39.99">
                 <a href="https://www.karrykraze.com/products/bags/Bag_BitesIsWeird" class="item-inner">
                     <div class="item-img">
                         <span class="sale-badge">SALE</span>
@@ -502,41 +521,68 @@
                         <span class="label">Now</span>
                         <span class="discounted-price">
                             <span class="currency">$</span>
-                            <span class="dollars">398</span>
-                            <span class="cents">00</span>
+                            <span class="dollars">39</span>
+                            <span class="cents">99</span>
                         </span>
-                        <span class="original-price">$598.00</span>
+                        <span class="original-price">$53.32</span>
 
                         <div class="savings-line">
                             <span class="savings-label">You save</span>
-                            <span class="savings-amount">$200.00</span>
+                            <span class="savings-amount">$13.33</span>
                         </div>
                     </div>
-
-
-
                     <div class="item-desc">B!tch#$ is Weird Tote Bag</div>
                 </a>
             </div>
-            <div class="grid-item sale nb" data-price="49.99">
+
+            <!--Heart Embossed Bag-->
+            <div class="grid-item sale nb" data-price="33.99">
                 <a href="https://www.karrykraze.com/products/bags/Bag_MiniHeart" class="item-inner">
                     <div class="item-img">
                         <span class="sale-badge">SALE</span>
                         <img class="default-image" src="Products/Bags/NonBrand/HeartEmbossed/HEMain.png">
                         <img class="hover-image" src="Products/Bags/NonBrand/HeartEmbossed/HEHover.jpg">
                     </div>
-                    <div class="item-price">$49.99 <span class="original-price">$110</span></div>
+                    <div class="price-wrap">
+                        <span class="label">Now</span>
+                        <span class="discounted-price">
+                            <span class="currency">$</span>
+                            <span class="dollars">33</span>
+                            <span class="cents">99</span>
+                        </span>
+                        <span class="original-price">$46.65</span>
+
+                        <div class="savings-line">
+                            <span class="savings-label">You save</span>
+                            <span class="savings-amount">$11.66</span>
+                        </div>
+                    </div>
                     <div class="item-desc">Heart Embossed Shoulder Bag</div>
                 </a>
             </div>
-            <div class="grid-item nb sale" data-price="49.99">
+
+<!--The Bucket Bag-->
+            <div class="grid-item nb sale" data-price="23.99">
                 <a href="https://www.karrykraze.com/products/bags/bag_TheBucket" class="item-inner">
                     <div class="item-img">
                         <span class="sale-badge">SALE</span>
                         <img class="default-image" src="Products/Bags/NonBrand/TheBucket/TBMain.png">
                         <img class="hover-image" src="Products/Bags/NonBrand/TheBucket/TBHover.jpg">
                     </div>
-                    <div class="item-price">$49.99 <span class="original-price">$110</span></div>
+                    <div class="price-wrap">
+                        <span class="label">Now</span>
+                        <span class="discounted-price">
+                            <span class="currency">$</span>
+                            <span class="dollars">23</span>
+                            <span class="cents">99</span>
+                        </span>
+                        <span class="original-price">$33.32</span>
+
+                        <div class="savings-line">
+                            <span class="savings-label">You save</span>
+                            <span class="savings-amount">$8.33</span>
+                        </div>
+                    </div>
                     <div class="item-desc">The Bucket Sack Bag</div>
                 </a>
             </div>
