@@ -71,6 +71,7 @@
             color: green;
             font-size: 16px;
         }
+
         .main-price {
             font-weight: bold;
             font-size: 24px;
@@ -80,6 +81,23 @@
             line-height: 1;
         }
 
+            .main-price .currency {
+                font-size: 16px;
+                margin-right: 2px;
+                align-self: flex-start;
+                padding-top: 2px;
+            }
+
+            .main-price .dollars {
+                font-size: 28px;
+            }
+
+            .main-price .cents {
+                font-size: 14px;
+                align-self: flex-start;
+                padding-top: 4px;
+            }
+
         .discounted-price {
             font-weight: bold;
             font-size: 24px;
@@ -114,41 +132,6 @@
             flex-basis: 50%;
         }
 
-
-
-
-        .discounted-price {
-            font-weight: bold;
-            font-size: 24px;
-            color: green;
-            display: inline-flex;
-            align-items: flex-start;
-            line-height: 1;
-        }
-
-            .discounted-price .currency {
-                font-size: 16px;
-                margin-right: 2px;
-                align-self: flex-start;
-                padding-top: 2px;
-            }
-
-            .discounted-price .dollars {
-                font-size: 28px;
-            }
-
-            .discounted-price .cents {
-                font-size: 14px;
-                align-self: flex-start;
-                padding-top: 4px;
-            }
-
-        .original-price {
-            color: #888;
-            text-decoration: line-through;
-            font-size: 18px;
-            flex-basis: 50%;
-        }
 
         .savings-line {
             display: flex;
@@ -561,7 +544,7 @@
                 </a>
             </div>
 
-<!--The Bucket Bag-->
+            <!--The Bucket Bag-->
             <div class="grid-item nb sale" data-price="23.99">
                 <a href="https://www.karrykraze.com/products/bags/bag_TheBucket" class="item-inner">
                     <div class="item-img">
