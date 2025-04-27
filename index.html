@@ -298,52 +298,60 @@
             background: #f39c12;
         }
 
-        .grid-item img {
-            width: 100%;
-            max-width: 300px;
-            object-fit: cover;
-            display: block;
-            transition: opacity 0.3s ease;
+        /* === Base Styling === */
+        .grid-item {
+            position: relative;
         }
 
-        .grid-item.out-of-stock img {
-            opacity: 0.3;
-        }
+            .grid-item img {
+                width: 100%;
+                max-width: 400px;
+                object-fit: cover;
+                display: block;
+                transition: opacity 0.3s ease;
+            }
 
-            .grid-item.out-of-stock img.hover-image {
+                .grid-item img.hover-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: auto;
+                    opacity: 0;
+                    object-fit: cover;
+                    transition: opacity 0.3s ease;
+                }
+
+            .grid-item.out-of-stock img {
+                opacity: 0.3;
+            }
+
+                .grid-item.out-of-stock img.hover-image {
+                    opacity: 0;
+                }
+
+            /* === Hover Effects (Desktop Only) === */
+            .grid-item:hover img.default-image {
                 opacity: 0;
             }
 
-        .grid-item.out-of-stock:hover img.hover-image {
-            opacity: 0.3;
+            .grid-item:hover img.hover-image {
+                opacity: 1;
+            }
+
+            .grid-item.out-of-stock:hover img.hover-image {
+                opacity: 0.3;
+            }
+
+        /* === Disable Hover Effects on Touch Devices === */
+        @media (hover: none) and (pointer: coarse) {
+            .grid-item:hover img.default-image,
+            .grid-item:hover img.hover-image,
+            .grid-item.out-of-stock:hover img.hover-image {
+                opacity: initial;
+            }
         }
 
-        .grid-item:hover img.default-image {
-            opacity: 0;
-        }
-
-        .grid-item img.hover-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: auto;
-            opacity: 0;
-            object-fit: cover;
-            transition: opacity 0.3s ease;
-        }
-
-        .grid-item img {
-            width: 100%;
-            max-width: 400px;
-            object-fit: cover;
-            display: block;
-            transition: opacity 0.3s ease;
-        }
-
-        .grid-item:hover img.hover-image {
-            opacity: 1;
-        }
 
 
         @media (max-width: 600px) {
