@@ -1,4 +1,4 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+﻿const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 module.exports = async (req, res) => {
     if (req.method === 'POST') {
@@ -8,14 +8,16 @@ module.exports = async (req, res) => {
                 line_items: [{
                     price_data: {
                         currency: 'usd',
-                        product_data: { name: 'Test Product' },
-                        unit_amount: 1999,
+                        product_data: {
+                            name: 'Test Product',
+                        },
+                        unit_amount: 1999, // $19.99
                     },
                     quantity: 1,
                 }],
                 mode: 'payment',
-                success_url: `${req.headers.origin}/public/success.html`,
-                cancel_url: `${req.headers.origin}/public/cancel.html`,
+                success_url: `${req.headers.origin}/`,   // ✅ back to homepage
+                cancel_url: `${req.headers.origin}/`,    // ✅ back to homepage
             });
 
             res.status(200).json({ url: session.url });

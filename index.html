@@ -11,9 +11,24 @@
 
     <script>
         document.getElementById("buyButton").addEventListener("click", async () => {
-            const res = await fetch("/api/create-checkout-session", { method: "POST" });
-            const data = await res.json();
-            window.location.href = data.url;
+            try {
+                const res = await fetch("/api/create-checkout-session", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" }
+                });
+
+                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+
+                const data = await res.json();
+                if (data.url) {
+                    window.location.href = data.url;
+                } else {
+                    alert("Checkout session failed. Please try again.");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Something went wrong with Stripe checkout.");
+            }
         });
     </script>
 </body>
